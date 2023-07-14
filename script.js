@@ -6,9 +6,11 @@ let equals = document.querySelector(".btn-equals");
 var stringToDisplay = "";
 const operators = ["+", "-", "/", "%", "*"];
 var lastoperator = "";
+const audio = new Audio("./sound.mp3");
 buttons.forEach((btn) => {
   btn.addEventListener("click", () => {
     const val = btn.innerText;
+    displayelm.classList.remove("prank");
     if (operators.includes(val)) {
       lastoperator = val;
       const lastChar = stringToDisplay.slice(-1);
@@ -50,7 +52,12 @@ const display = (str) => {
   displayelm.innerText = str || "0.00";
 };
 const total = () => {
-  const ttl = eval(stringToDisplay);
+  const prankval = randomnum();
+  if (prankval) {
+    audio.play();
+    displayelm.classList.add("prank");
+  }
+  const ttl = eval(stringToDisplay) + prankval;
   stringToDisplay = ttl.toString();
   display(ttl);
 };
@@ -59,4 +66,8 @@ const clear = (str) => {
     str = str.slice(0, -1);
   }
   return str;
+};
+const randomnum = () => {
+  const num = Math.round(Math.random() * 10);
+  return num <= 3 ? num : 0;
 };
