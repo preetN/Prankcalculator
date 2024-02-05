@@ -21,6 +21,7 @@ buttons.forEach((btn) => {
     if (val === "AC") {
       stringToDisplay = "";
       return display(stringToDisplay);
+      // {}
     }
     if (val === "C") {
       let a = clear(stringToDisplay.toString());
